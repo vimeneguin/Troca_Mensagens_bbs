@@ -65,6 +65,70 @@ def salvar():
 dados = carregar()
 usuarios_online = set()  # usuários logados nesta execução do servidor
 
+# ids de tudo o que já está guardado (para não guardar duas vezes o mesmo dado)
+ids = set()
+for lista in (dados["logins"], dados["mensagens"]):
+    for item in lista:
+        ids.add(item["id"])
+
+
+def novo_id():
+    return nome + "-" + str(time.time_ns())
+
+
+def aplicar(tipo, item):
+    # guarda o dado na memória. Devolve False se este servidor já tinha o dado.
+    if tipo == "canal":
+        if item in dados["canais"]:
+            return False
+        dados["canais"].append(item)
+        return True
+
+    if item["id"] in ids:
+        return False
+    ids.add(item["id"])
+    if tipo == "login":
+        dados["logins"].append(item)
+    else:
+        dados["mensagens"].append(item)
+    return True
+
+
+def registrar(tipo, item):
+    # dado novo recebido de um cliente: guarda, salva em disco e replica nos outros servidores
+    aplicar(tipo, item)
+    salvar()
+    conteudo = preparar({"origin": nome, "type": tipo, "item": item})
+    pub.send_multipart([b"replication", msgpack.packb({"service": "replication", "data": conteudo})])
+    print(f"[{nome}] REPLICANDO | {tipo} | {item}", flush=True)
+
+
+def tratar_replicacao(msg):
+    # dado novo vindo de outro servidor
+    if msg["origin"] == nome:
+        return
+    if aplicar(msg["type"], msg["item"]):
+        salvar()
+        print(f"[{nome}] REPLICADO | de {msg['origin']} | {msg['type']} | {msg['item']}", flush=True)
+
+
+def copiar_dados_dos_outros():
+    # quando o servidor inicia pega os dados que já existem nos outros servidores
+    lista = pedir_referencia("list", {"user": nome})["list"]
+    for servidor in lista:
+        if servidor["name"] == nome:
+            continue
+        resposta = perguntar(servidor, "state", {"user": nome})
+        if resposta is None:
+            continue
+        for canal in resposta["dados"]["canais"]:
+            aplicar("canal", canal)
+        for item in resposta["dados"]["logins"]:
+            aplicar("login", item)
+        for item in resposta["dados"]["mensagens"]:
+            aplicar("mensagem", item)
+    salvar()
+
 
 def tratar_login(msg):
     usuario = msg.get("user", "").strip()
@@ -76,8 +140,7 @@ def tratar_login(msg):
         return {"status": "erro", "description": "usuário já está logado"}
 
     usuarios_online.add(usuario)
-    dados["logins"].append({"user": usuario, "timestamp": msg["timestamp"]})
-    salvar()
+    registrar("login", {"id": novo_id(), "user": usuario, "timestamp": msg["timestamp"], "server": nome})
     return {"status": "sucesso"}
 
 
@@ -90,8 +153,7 @@ def tratar_criar_canal(msg):
     if canal in dados["canais"]:
         return {"status": "erro", "description": "canal já existe"}
 
-    dados["canais"].append(canal)
-    salvar()
+    registrar("canal", canal)
     return {"status": "sucesso"}
 
 
@@ -104,8 +166,6 @@ def tratar_publicar(msg):
     canal = msg.get("channel", "")
     texto = msg.get("message", "")
 
-    # os servidores ainda não replicam os canais entre si, então não dá para
-    # exigir que o canal esteja na lista deste servidor (ele pode ter sido criado em outro)
     if not re.fullmatch(r"[A-Za-z0-9_-]+", canal):
         return {"status": "erro", "description": "nome de canal inválido"}
     if texto == "":
@@ -116,8 +176,9 @@ def tratar_publicar(msg):
     pub.send_multipart([canal.encode(), msgpack.packb({"service": "publish", "data": conteudo})])
     print(f"[{nome}] PUBLICADO | {canal} | {conteudo}", flush=True)
 
-    # guarda a publicação em disco
-    dados["mensagens"].append({
+    # guarda a publicação em disco e replica nos outros servidores
+    registrar("mensagem", {
+        "id": novo_id(),
         "user": usuario,
         "channel": canal,
         "message": texto,
@@ -125,8 +186,15 @@ def tratar_publicar(msg):
         "timestamp_publicacao": conteudo["timestamp"],
         "clock": conteudo["clock"],
     })
-    salvar()
     return {"status": "sucesso"}
+
+
+def tratar_historico(msg):
+    # devolve as últimas 10 mensagens do canal (em ordem pelo relógio lógico)
+    canal = msg.get("channel", "")
+    lista = [m for m in dados["mensagens"] if m["channel"] == canal]
+    lista.sort(key=lambda m: (m["clock"], m["timestamp_publicacao"]))
+    return {"status": "sucesso", "messages": lista[-10:]}
 
 
 def pedir_referencia(servico, conteudo):
@@ -154,7 +222,8 @@ def perguntar(servidor, servico, conteudo):
         s.send(msgpack.packb({"service": servico, "data": conteudo}))
         resposta = msgpack.unpackb(s.recv())["data"]
         receber_clock(resposta)
-        print(f"[{nome}] RECEBIDO  | {servidor['name']}/{servico} | {resposta}", flush=True)
+        resumo = {k: v for k, v in resposta.items() if k != "dados"}
+        print(f"[{nome}] RECEBIDO  | {servidor['name']}/{servico} | {resumo}", flush=True)
         return resposta
     except zmq.ZMQError:
         print(f"[{nome}] SEM RESPOSTA | {servidor['name']}/{servico}", flush=True)
@@ -253,11 +322,14 @@ def tratar_servidor(msg):
         resposta = {"status": "OK"}
     elif servico == "clock" and coordenador == nome:
         resposta = tratar_relogio(msg["data"])
+    elif servico == "state":
+        resposta = {"status": "OK", "dados": dados}
     else:
         resposta = {"status": "erro", "description": "serviço desconhecido"}
 
     preparar(resposta)
-    print(f"[{nome}] ENVIADO   | {servico} | {resposta}", flush=True)
+    resumo = {k: v for k, v in resposta.items() if k != "dados"}
+    print(f"[{nome}] ENVIADO   | {servico} | {resumo}", flush=True)
     return {"service": servico, "data": resposta}
 
 
@@ -274,6 +346,7 @@ pub.connect("tcp://" + proxy + ":5557")
 sub = context.socket(zmq.SUB)
 sub.connect("tcp://" + proxy + ":5558")
 sub.setsockopt(zmq.SUBSCRIBE, b"servers")
+sub.setsockopt(zmq.SUBSCRIBE, b"replication")
 time.sleep(1)  # tempo para as conexões com o proxy ficarem prontas
 
 ref = context.socket(zmq.REQ)
@@ -284,6 +357,7 @@ rank = pedir_referencia("rank", {"user": nome})["rank"]
 peer.bind("tcp://*:" + str(6000 + rank))
 print(f"[{nome}] servidor iniciado com rank {rank}", flush=True)
 
+copiar_dados_dos_outros()
 eleicao()
 
 poller = zmq.Poller()
@@ -299,13 +373,16 @@ while True:
         msg = msgpack.unpackb(peer.recv())
         peer.send(msgpack.packb(tratar_servidor(msg)))
 
-    # avisos de novo coordenador
+    # avisos de novo coordenador (tópico servers) e dados replicados (tópico replication)
     if sub in eventos:
         topico, conteudo = sub.recv_multipart()
         msg = msgpack.unpackb(conteudo)
         receber_clock(msg["data"])
-        coordenador = msg["data"]["coordinator"]
-        print(f"[{nome}] COORDENADOR | {coordenador}", flush=True)
+        if topico == b"servers":
+            coordenador = msg["data"]["coordinator"]
+            print(f"[{nome}] COORDENADOR | {coordenador}", flush=True)
+        elif topico == b"replication":
+            tratar_replicacao(msg["data"])
 
     # requisições dos clientes
     if rep in eventos:
@@ -323,6 +400,8 @@ while True:
             resposta = tratar_listar_canais(conteudo)
         elif servico == "publish":
             resposta = tratar_publicar(conteudo)
+        elif servico == "history":
+            resposta = tratar_historico(conteudo)
         else:
             resposta = {"status": "erro", "description": "serviço desconhecido"}
 
