@@ -92,6 +92,9 @@ async function main() {
         sub.subscribe(canal);
         inscritos.add(canal);
         console.log(`[${nome}] INSCRITO | canal: ${canal}`);
+        // pede as últimas mensagens do canal
+        const h = await enviar(req, "history", { user: nome, channel: canal });
+        console.log(`[${nome}] HISTORICO | canal: ${canal} | ${h.messages.length} mensagens anteriores`);
       }
     }
 

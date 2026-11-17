@@ -1,0 +1,656 @@
+{
+  "logins": [
+    {
+      "id": "servidor_2-1794928288291944252",
+      "user": "bot_2",
+      "timestamp": 1794928287.78,
+      "server": "servidor_2"
+    },
+    {
+      "id": "servidor_1-1794928288531133421",
+      "user": "bot_1",
+      "timestamp": 1794928288.013,
+      "server": "servidor_1"
+    }
+  ],
+  "canais": [
+    "canal_318",
+    "canal_529",
+    "canal_760",
+    "canal_256",
+    "canal_300",
+    "canal_378"
+  ],
+  "mensagens": [
+    {
+      "id": "servidor_1-1794928288555805841",
+      "user": "bot_2",
+      "channel": "canal_318",
+      "message": "algu\u00e9m a\u00ed?",
+      "timestamp_requisicao": 1794928288.553,
+      "timestamp_publicacao": 1794928293.5555105,
+      "clock": 25
+    },
+    {
+      "id": "servidor_1-1794928288569881137",
+      "user": "bot_1",
+      "channel": "canal_318",
+      "message": "sistemas distribu\u00eddos \u00e9 legal",
+      "timestamp_requisicao": 1794928288.568,
+      "timestamp_publicacao": 1794928293.5697489,
+      "clock": 32
+    },
+    {
+      "id": "servidor_2-1794928289563808248",
+      "user": "bot_2",
+      "channel": "canal_318",
+      "message": "bom dia",
+      "timestamp_requisicao": 1794928289.562,
+      "timestamp_publicacao": 1794928286.5637352,
+      "clock": 34
+    },
+    {
+      "id": "servidor_1-1794928289578356496",
+      "user": "bot_1",
+      "channel": "canal_318",
+      "message": "ol\u00e1 mundo",
+      "timestamp_requisicao": 1794928289.577,
+      "timestamp_publicacao": 1794928294.5782955,
+      "clock": 36
+    },
+    {
+      "id": "servidor_2-1794928290572157336",
+      "user": "bot_2",
+      "channel": "canal_318",
+      "message": "bom dia",
+      "timestamp_requisicao": 1794928290.57,
+      "timestamp_publicacao": 1794928287.5720513,
+      "clock": 38
+    },
+    {
+      "id": "servidor_1-1794928290587433981",
+      "user": "bot_1",
+      "channel": "canal_318",
+      "message": "ol\u00e1 mundo",
+      "timestamp_requisicao": 1794928290.586,
+      "timestamp_publicacao": 1794928295.5872881,
+      "clock": 40
+    },
+    {
+      "id": "servidor_2-1794928291580949885",
+      "user": "bot_2",
+      "channel": "canal_318",
+      "message": "oi pessoal",
+      "timestamp_requisicao": 1794928291.579,
+      "timestamp_publicacao": 1794928288.5808744,
+      "clock": 42
+    },
+    {
+      "id": "servidor_1-1794928291596544238",
+      "user": "bot_1",
+      "channel": "canal_318",
+      "message": "mensagem aleat\u00f3ria",
+      "timestamp_requisicao": 1794928291.593,
+      "timestamp_publicacao": 1794928296.5964897,
+      "clock": 44
+    },
+    {
+      "id": "servidor_2-1794928292593888933",
+      "user": "bot_2",
+      "channel": "canal_318",
+      "message": "algu\u00e9m a\u00ed?",
+      "timestamp_requisicao": 1794928292.592,
+      "timestamp_publicacao": 1794928289.593732,
+      "clock": 46
+    },
+    {
+      "id": "servidor_1-1794928292605113719",
+      "user": "bot_1",
+      "channel": "canal_318",
+      "message": "ol\u00e1 mundo",
+      "timestamp_requisicao": 1794928292.6,
+      "timestamp_publicacao": 1794928297.6048875,
+      "clock": 48
+    },
+    {
+      "id": "servidor_2-1794928293603022155",
+      "user": "bot_2",
+      "channel": "canal_318",
+      "message": "ol\u00e1 mundo",
+      "timestamp_requisicao": 1794928293.601,
+      "timestamp_publicacao": 1794928290.60296,
+      "clock": 51
+    },
+    {
+      "id": "servidor_1-1794928293617400943",
+      "user": "bot_1",
+      "channel": "canal_318",
+      "message": "tudo bem?",
+      "timestamp_requisicao": 1794928293.613,
+      "timestamp_publicacao": 1794928298.6173155,
+      "clock": 53
+    },
+    {
+      "id": "servidor_2-1794928294614425276",
+      "user": "bot_2",
+      "channel": "canal_318",
+      "message": "ol\u00e1 mundo",
+      "timestamp_requisicao": 1794928294.612,
+      "timestamp_publicacao": 1794928291.614182,
+      "clock": 55
+    },
+    {
+      "id": "servidor_1-1794928294626972728",
+      "user": "bot_1",
+      "channel": "canal_318",
+      "message": "oi pessoal",
+      "timestamp_requisicao": 1794928294.625,
+      "timestamp_publicacao": 1794928299.6266139,
+      "clock": 57
+    },
+    {
+      "id": "servidor_1-1794928295633650300",
+      "user": "bot_1",
+      "channel": "canal_318",
+      "message": "algu\u00e9m a\u00ed?",
+      "timestamp_requisicao": 1794928295.632,
+      "timestamp_publicacao": 1794928300.6334887,
+      "clock": 61
+    },
+    {
+      "id": "servidor_2-1794928295622452958",
+      "user": "bot_2",
+      "channel": "canal_318",
+      "message": "bom dia",
+      "timestamp_requisicao": 1794928295.621,
+      "timestamp_publicacao": 1794928292.622388,
+      "clock": 59
+    },
+    {
+      "id": "servidor_1-1794928296640671088",
+      "user": "bot_1",
+      "channel": "canal_318",
+      "message": "testando o canal",
+      "timestamp_requisicao": 1794928296.639,
+      "timestamp_publicacao": 1794928301.6404567,
+      "clock": 65
+    },
+    {
+      "id": "servidor_2-1794928296636480335",
+      "user": "bot_2",
+      "channel": "canal_318",
+      "message": "mensagem aleat\u00f3ria",
+      "timestamp_requisicao": 1794928296.635,
+      "timestamp_publicacao": 1794928293.6363792,
+      "clock": 63
+    },
+    {
+      "id": "servidor_1-1794928297649265541",
+      "user": "bot_1",
+      "channel": "canal_318",
+      "message": "mensagem aleat\u00f3ria",
+      "timestamp_requisicao": 1794928297.648,
+      "timestamp_publicacao": 1794928302.6492188,
+      "clock": 69
+    },
+    {
+      "id": "servidor_2-1794928297648295324",
+      "user": "bot_2",
+      "channel": "canal_318",
+      "message": "testando o canal",
+      "timestamp_requisicao": 1794928297.647,
+      "timestamp_publicacao": 1794928294.6482391,
+      "clock": 67
+    },
+    {
+      "id": "servidor_1-1794928298672161638",
+      "user": "bot_1",
+      "channel": "canal_529",
+      "message": "tudo bem?",
+      "timestamp_requisicao": 1794928298.671,
+      "timestamp_publicacao": 1794928299.6701202,
+      "clock": 83
+    },
+    {
+      "id": "servidor_2-1794928298672222627",
+      "user": "bot_2",
+      "channel": "canal_256",
+      "message": "algu\u00e9m a\u00ed?",
+      "timestamp_requisicao": 1794928298.671,
+      "timestamp_publicacao": 1794928299.6719482,
+      "clock": 83
+    },
+    {
+      "id": "servidor_1-1794928299682473712",
+      "user": "bot_2",
+      "channel": "canal_256",
+      "message": "algu\u00e9m a\u00ed?",
+      "timestamp_requisicao": 1794928299.68,
+      "timestamp_publicacao": 1794928300.6804292,
+      "clock": 89
+    },
+    {
+      "id": "servidor_2-1794928299682485829",
+      "user": "bot_1",
+      "channel": "canal_529",
+      "message": "tudo bem?",
+      "timestamp_requisicao": 1794928299.68,
+      "timestamp_publicacao": 1794928300.6821995,
+      "clock": 88
+    },
+    {
+      "id": "servidor_1-1794928300699113986",
+      "user": "bot_1",
+      "channel": "canal_529",
+      "message": "oi pessoal",
+      "timestamp_requisicao": 1794928300.697,
+      "timestamp_publicacao": 1794928301.6971073,
+      "clock": 92
+    },
+    {
+      "id": "servidor_2-1794928300699070031",
+      "user": "bot_2",
+      "channel": "canal_256",
+      "message": "bom dia",
+      "timestamp_requisicao": 1794928300.697,
+      "timestamp_publicacao": 1794928301.6988134,
+      "clock": 93
+    },
+    {
+      "id": "servidor_1-1794928301712004749",
+      "user": "bot_1",
+      "channel": "canal_529",
+      "message": "tudo bem?",
+      "timestamp_requisicao": 1794928301.71,
+      "timestamp_publicacao": 1794928302.7099612,
+      "clock": 96
+    },
+    {
+      "id": "servidor_2-1794928301710991374",
+      "user": "bot_2",
+      "channel": "canal_256",
+      "message": "testando o canal",
+      "timestamp_requisicao": 1794928301.709,
+      "timestamp_publicacao": 1794928302.7106905,
+      "clock": 97
+    },
+    {
+      "id": "servidor_1-1794928302722992941",
+      "user": "bot_1",
+      "channel": "canal_529",
+      "message": "tudo bem?",
+      "timestamp_requisicao": 1794928302.721,
+      "timestamp_publicacao": 1794928303.720915,
+      "clock": 100
+    },
+    {
+      "id": "servidor_2-1794928302723331973",
+      "user": "bot_2",
+      "channel": "canal_256",
+      "message": "mensagem aleat\u00f3ria",
+      "timestamp_requisicao": 1794928302.72,
+      "timestamp_publicacao": 1794928303.7227898,
+      "clock": 101
+    },
+    {
+      "id": "servidor_1-1794928303742329979",
+      "user": "bot_2",
+      "channel": "canal_256",
+      "message": "ol\u00e1 mundo",
+      "timestamp_requisicao": 1794928303.74,
+      "timestamp_publicacao": 1794928304.740249,
+      "clock": 105
+    },
+    {
+      "id": "servidor_2-1794928303741869080",
+      "user": "bot_1",
+      "channel": "canal_529",
+      "message": "tudo bem?",
+      "timestamp_requisicao": 1794928303.739,
+      "timestamp_publicacao": 1794928304.7415268,
+      "clock": 104
+    },
+    {
+      "id": "servidor_1-1794928304762584511",
+      "user": "bot_2",
+      "channel": "canal_256",
+      "message": "tudo bem?",
+      "timestamp_requisicao": 1794928304.761,
+      "timestamp_publicacao": 1794928305.7605174,
+      "clock": 110
+    },
+    {
+      "id": "servidor_2-1794928304757908113",
+      "user": "bot_1",
+      "channel": "canal_529",
+      "message": "algu\u00e9m a\u00ed?",
+      "timestamp_requisicao": 1794928304.756,
+      "timestamp_publicacao": 1794928305.7576244,
+      "clock": 108
+    },
+    {
+      "id": "servidor_1-1794928305783914793",
+      "user": "bot_2",
+      "channel": "canal_256",
+      "message": "tudo bem?",
+      "timestamp_requisicao": 1794928305.782,
+      "timestamp_publicacao": 1794928306.7817695,
+      "clock": 114
+    },
+    {
+      "id": "servidor_2-1794928305781385554",
+      "user": "bot_1",
+      "channel": "canal_529",
+      "message": "algu\u00e9m a\u00ed?",
+      "timestamp_requisicao": 1794928305.78,
+      "timestamp_publicacao": 1794928306.7811065,
+      "clock": 112
+    },
+    {
+      "id": "servidor_1-1794928306805070291",
+      "user": "bot_2",
+      "channel": "canal_256",
+      "message": "mensagem aleat\u00f3ria",
+      "timestamp_requisicao": 1794928306.801,
+      "timestamp_publicacao": 1794928307.802662,
+      "clock": 118
+    },
+    {
+      "id": "servidor_2-1794928306800561887",
+      "user": "bot_1",
+      "channel": "canal_529",
+      "message": "mensagem aleat\u00f3ria",
+      "timestamp_requisicao": 1794928306.798,
+      "timestamp_publicacao": 1794928307.8002024,
+      "clock": 116
+    },
+    {
+      "id": "servidor_1-1794928307816917236",
+      "user": "bot_1",
+      "channel": "canal_529",
+      "message": "algu\u00e9m a\u00ed?",
+      "timestamp_requisicao": 1794928307.814,
+      "timestamp_publicacao": 1794928308.8148363,
+      "clock": 121
+    },
+    {
+      "id": "servidor_2-1794928307816495589",
+      "user": "bot_2",
+      "channel": "canal_256",
+      "message": "oi pessoal",
+      "timestamp_requisicao": 1794928307.814,
+      "timestamp_publicacao": 1794928308.8161623,
+      "clock": 122
+    },
+    {
+      "id": "servidor_1-1794928308856946409",
+      "user": "bot_1",
+      "channel": "canal_300",
+      "message": "algu\u00e9m a\u00ed?",
+      "timestamp_requisicao": 1794928308.856,
+      "timestamp_publicacao": 1794928309.853746,
+      "clock": 140
+    },
+    {
+      "id": "servidor_1-1794928308862217204",
+      "user": "bot_2",
+      "channel": "canal_378",
+      "message": "testando o canal",
+      "timestamp_requisicao": 1794928308.857,
+      "timestamp_publicacao": 1794928309.8590674,
+      "clock": 143
+    },
+    {
+      "id": "servidor_1-1794928309869835538",
+      "user": "bot_2",
+      "channel": "canal_378",
+      "message": "algu\u00e9m a\u00ed?",
+      "timestamp_requisicao": 1794928309.869,
+      "timestamp_publicacao": 1794928310.8666644,
+      "clock": 147
+    },
+    {
+      "id": "servidor_2-1794928309867313126",
+      "user": "bot_1",
+      "channel": "canal_300",
+      "message": "oi pessoal",
+      "timestamp_requisicao": 1794928309.866,
+      "timestamp_publicacao": 1794928310.865965,
+      "clock": 145
+    },
+    {
+      "id": "servidor_1-1794928310879026272",
+      "user": "bot_2",
+      "channel": "canal_378",
+      "message": "bom dia",
+      "timestamp_requisicao": 1794928310.878,
+      "timestamp_publicacao": 1794928311.875813,
+      "clock": 151
+    },
+    {
+      "id": "servidor_2-1794928310877445245",
+      "user": "bot_1",
+      "channel": "canal_300",
+      "message": "bom dia",
+      "timestamp_requisicao": 1794928310.876,
+      "timestamp_publicacao": 1794928311.8760567,
+      "clock": 149
+    },
+    {
+      "id": "servidor_1-1794928311888252659",
+      "user": "bot_2",
+      "channel": "canal_378",
+      "message": "mensagem aleat\u00f3ria",
+      "timestamp_requisicao": 1794928311.887,
+      "timestamp_publicacao": 1794928312.8850393,
+      "clock": 155
+    },
+    {
+      "id": "servidor_2-1794928311887564259",
+      "user": "bot_1",
+      "channel": "canal_300",
+      "message": "sistemas distribu\u00eddos \u00e9 legal",
+      "timestamp_requisicao": 1794928311.886,
+      "timestamp_publicacao": 1794928312.886105,
+      "clock": 153
+    },
+    {
+      "id": "servidor_1-1794928312899376415",
+      "user": "bot_1",
+      "channel": "canal_300",
+      "message": "bom dia",
+      "timestamp_requisicao": 1794928312.897,
+      "timestamp_publicacao": 1794928313.8961353,
+      "clock": 158
+    },
+    {
+      "id": "servidor_2-1794928312899398436",
+      "user": "bot_2",
+      "channel": "canal_378",
+      "message": "testando o canal",
+      "timestamp_requisicao": 1794928312.897,
+      "timestamp_publicacao": 1794928313.8980184,
+      "clock": 159
+    },
+    {
+      "id": "servidor_1-1794928313911385535",
+      "user": "bot_2",
+      "channel": "canal_378",
+      "message": "algu\u00e9m a\u00ed?",
+      "timestamp_requisicao": 1794928313.91,
+      "timestamp_publicacao": 1794928314.9082055,
+      "clock": 163
+    },
+    {
+      "id": "servidor_2-1794928313910055808",
+      "user": "bot_1",
+      "channel": "canal_300",
+      "message": "sistemas distribu\u00eddos \u00e9 legal",
+      "timestamp_requisicao": 1794928313.909,
+      "timestamp_publicacao": 1794928314.9087155,
+      "clock": 162
+    },
+    {
+      "id": "servidor_1-1794928314923430059",
+      "user": "bot_2",
+      "channel": "canal_378",
+      "message": "bom dia",
+      "timestamp_requisicao": 1794928314.922,
+      "timestamp_publicacao": 1794928315.9202557,
+      "clock": 167
+    },
+    {
+      "id": "servidor_2-1794928314923480314",
+      "user": "bot_1",
+      "channel": "canal_300",
+      "message": "mensagem aleat\u00f3ria",
+      "timestamp_requisicao": 1794928314.922,
+      "timestamp_publicacao": 1794928315.9221506,
+      "clock": 166
+    },
+    {
+      "id": "servidor_1-1794928315935428565",
+      "user": "bot_2",
+      "channel": "canal_378",
+      "message": "tudo bem?",
+      "timestamp_requisicao": 1794928315.934,
+      "timestamp_publicacao": 1794928316.9322581,
+      "clock": 172
+    },
+    {
+      "id": "servidor_2-1794928315935482270",
+      "user": "bot_1",
+      "channel": "canal_300",
+      "message": "bom dia",
+      "timestamp_requisicao": 1794928315.934,
+      "timestamp_publicacao": 1794928316.9341428,
+      "clock": 171
+    },
+    {
+      "id": "servidor_1-1794928316943578044",
+      "user": "bot_1",
+      "channel": "canal_300",
+      "message": "oi pessoal",
+      "timestamp_requisicao": 1794928316.942,
+      "timestamp_publicacao": 1794928317.9403849,
+      "clock": 175
+    },
+    {
+      "id": "servidor_2-1794928316942867015",
+      "user": "bot_2",
+      "channel": "canal_378",
+      "message": "tudo bem?",
+      "timestamp_requisicao": 1794928316.942,
+      "timestamp_publicacao": 1794928317.9415226,
+      "clock": 176
+    },
+    {
+      "id": "servidor_1-1794928317956591163",
+      "user": "bot_2",
+      "channel": "canal_378",
+      "message": "sistemas distribu\u00eddos \u00e9 legal",
+      "timestamp_requisicao": 1794928317.955,
+      "timestamp_publicacao": 1794928318.9534144,
+      "clock": 180
+    },
+    {
+      "id": "servidor_2-1794928317956612451",
+      "user": "bot_1",
+      "channel": "canal_300",
+      "message": "tudo bem?",
+      "timestamp_requisicao": 1794928317.955,
+      "timestamp_publicacao": 1794928318.9552672,
+      "clock": 179
+    },
+    {
+      "id": "servidor_1-1794928318969752920",
+      "user": "bot_2",
+      "channel": "canal_529",
+      "message": "ol\u00e1 mundo",
+      "timestamp_requisicao": 1794928318.969,
+      "timestamp_publicacao": 1794928319.9665756,
+      "clock": 186
+    },
+    {
+      "id": "servidor_2-1794928318969508896",
+      "user": "bot_1",
+      "channel": "canal_378",
+      "message": "ol\u00e1 mundo",
+      "timestamp_requisicao": 1794928318.968,
+      "timestamp_publicacao": 1794928319.968193,
+      "clock": 185
+    },
+    {
+      "id": "servidor_1-1794928319982337456",
+      "user": "bot_2",
+      "channel": "canal_529",
+      "message": "tudo bem?",
+      "timestamp_requisicao": 1794928319.98,
+      "timestamp_publicacao": 1794928320.9772177,
+      "clock": 192
+    },
+    {
+      "id": "servidor_2-1794928319982197205",
+      "user": "bot_1",
+      "channel": "canal_378",
+      "message": "testando o canal",
+      "timestamp_requisicao": 1794928319.98,
+      "timestamp_publicacao": 1794928320.9797032,
+      "clock": 192
+    },
+    {
+      "id": "servidor_1-1794928321001614774",
+      "user": "bot_2",
+      "channel": "canal_529",
+      "message": "sistemas distribu\u00eddos \u00e9 legal",
+      "timestamp_requisicao": 1794928321,
+      "timestamp_publicacao": 1794928321.9965038,
+      "clock": 196
+    },
+    {
+      "id": "servidor_2-1794928321001625799",
+      "user": "bot_1",
+      "channel": "canal_378",
+      "message": "sistemas distribu\u00eddos \u00e9 legal",
+      "timestamp_requisicao": 1794928321,
+      "timestamp_publicacao": 1794928321.999125,
+      "clock": 196
+    },
+    {
+      "id": "servidor_1-1794928322018867933",
+      "user": "bot_2",
+      "channel": "canal_529",
+      "message": "ol\u00e1 mundo",
+      "timestamp_requisicao": 1794928322.017,
+      "timestamp_publicacao": 1794928323.0136976,
+      "clock": 200
+    },
+    {
+      "id": "servidor_2-1794928322018625323",
+      "user": "bot_1",
+      "channel": "canal_378",
+      "message": "tudo bem?",
+      "timestamp_requisicao": 1794928322.017,
+      "timestamp_publicacao": 1794928323.0161045,
+      "clock": 200
+    },
+    {
+      "id": "servidor_1-1794928323032713409",
+      "user": "bot_2",
+      "channel": "canal_529",
+      "message": "algu\u00e9m a\u00ed?",
+      "timestamp_requisicao": 1794928323.031,
+      "timestamp_publicacao": 1794928324.027397,
+      "clock": 204
+    },
+    {
+      "id": "servidor_2-1794928323032303018",
+      "user": "bot_1",
+      "channel": "canal_378",
+      "message": "sistemas distribu\u00eddos \u00e9 legal",
+      "timestamp_requisicao": 1794928323.03,
+      "timestamp_publicacao": 1794928324.0296223,
+      "clock": 204
+    }
+  ]
+}
