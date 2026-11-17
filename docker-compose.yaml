@@ -12,6 +12,7 @@ services:
     build: ./servidor
     environment:
       - SERVER_NAME=servidor_1
+      - CLOCK_OFFSET=5
     volumes:
       - ./dados:/dados
     depends_on:
@@ -23,6 +24,7 @@ services:
     build: ./servidor
     environment:
       - SERVER_NAME=servidor_2
+      - CLOCK_OFFSET=-3
     volumes:
       - ./dados:/dados
     depends_on:

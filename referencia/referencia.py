@@ -44,8 +44,7 @@ def tratar_heartbeat(msg):
     if nome not in ranks:
         return {"status": "erro", "description": "servidor sem rank"}
     servidores[nome] = time.time()
-    # devolve a hora correta para o servidor atualizar o relógio dele
-    return {"status": "OK", "time": time.time()}
+    return {"status": "OK"}
 
 
 context = zmq.Context()
