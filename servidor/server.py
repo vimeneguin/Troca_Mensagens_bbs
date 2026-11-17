@@ -8,6 +8,7 @@ import msgpack
 # Configurações (os valores padrão servem para o docker compose)
 nome = os.environ.get("SERVER_NAME", "servidor_1")
 broker = os.environ.get("BROKER_HOST", "broker")
+proxy = os.environ.get("PROXY_HOST", "proxy")
 pasta_dados = os.environ.get("DADOS_DIR", "/dados")
 
 os.makedirs(pasta_dados, exist_ok=True)
@@ -18,8 +19,13 @@ def carregar():
     # le os dados salvos em disco (se o arquivo existir)
     if os.path.exists(arquivo):
         with open(arquivo, "r") as f:
-            return json.load(f)
-    return {"logins": [], "canais": []}
+            dados = json.load(f)
+    else:
+        dados = {}
+    dados.setdefault("logins", [])
+    dados.setdefault("canais", [])
+    dados.setdefault("mensagens", [])
+    return dados
 
 
 def salvar():
@@ -64,9 +70,48 @@ def tratar_listar_canais(msg):
     return {"status": "sucesso", "channels": dados["canais"]}
 
 
+def tratar_publicar(msg):
+    usuario = msg.get("user", "")
+    canal = msg.get("channel", "")
+    texto = msg.get("message", "")
+
+    if canal not in dados["canais"]:
+        return {"status": "erro", "description": "canal não existe neste servidor"}
+    if texto == "":
+        return {"status": "erro", "description": "mensagem vazia"}
+
+    # publica no canal usando o nome do canal como tópico
+    publicacao = {
+        "service": "publish",
+        "data": {
+            "user": usuario,
+            "channel": canal,
+            "message": texto,
+            "timestamp": time.time(),
+        },
+    }
+    pub.send_multipart([canal.encode(), msgpack.packb(publicacao)])
+    print(f"[{nome}] PUBLICADO | {canal} | {publicacao['data']}", flush=True)
+
+    # guarda a publicação em disco
+    dados["mensagens"].append({
+        "user": usuario,
+        "channel": canal,
+        "message": texto,
+        "timestamp_requisicao": msg["timestamp"],
+        "timestamp_publicacao": publicacao["data"]["timestamp"],
+    })
+    salvar()
+    return {"status": "sucesso"}
+
+
 context = zmq.Context()
 socket = context.socket(zmq.REP)
 socket.connect("tcp://" + broker + ":5556")
+
+pub = context.socket(zmq.PUB)
+pub.connect("tcp://" + proxy + ":5557")
+time.sleep(1)  # tempo para a conexão com o proxy ficar pronta
 
 print(f"[{nome}] servidor iniciado", flush=True)
 
@@ -75,7 +120,7 @@ while True:
     msg = msgpack.unpackb(pacote)
     servico = msg["service"]
     conteudo = msg["data"]
-    print(f"[{nome}] RECEBIDO | {servico} | {conteudo}", flush=True)
+    print(f"[{nome}] RECEBIDO  | {servico} | {conteudo}", flush=True)
 
     if servico == "login":
         resposta = tratar_login(conteudo)
@@ -83,6 +128,8 @@ while True:
         resposta = tratar_criar_canal(conteudo)
     elif servico == "channels":
         resposta = tratar_listar_canais(conteudo)
+    elif servico == "publish":
+        resposta = tratar_publicar(conteudo)
     else:
         resposta = {"status": "erro", "description": "serviço desconhecido"}
 

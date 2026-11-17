@@ -2,6 +2,9 @@ services:
   broker:
     build: ./broker
 
+  proxy:
+    build: ./proxy
+
   servidor_1:
     build: ./servidor
     environment:
@@ -10,6 +13,7 @@ services:
       - ./dados:/dados
     depends_on:
       - broker
+      - proxy
 
   servidor_2:
     build: ./servidor
@@ -19,6 +23,7 @@ services:
       - ./dados:/dados
     depends_on:
       - broker
+      - proxy
 
   bot_1:
     build: ./cliente
@@ -26,6 +31,7 @@ services:
       - BOT_NAME=bot_1
     depends_on:
       - broker
+      - proxy
       - servidor_1
       - servidor_2
 
@@ -35,5 +41,6 @@ services:
       - BOT_NAME=bot_2
     depends_on:
       - broker
+      - proxy
       - servidor_1
       - servidor_2

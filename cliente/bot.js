@@ -2,10 +2,26 @@ const zmq = require("zeromq");
 const { encode, decode } = require("@msgpack/msgpack");
 
 const BROKER = process.env.BROKER_HOST || "broker";
+const PROXY = process.env.PROXY_HOST || "proxy";
 const nomeBase = process.env.BOT_NAME || "bot";
 let nome = nomeBase;
 
+const inscritos = new Set(); // canais em que o bot está inscrito
+
+const mensagens = [
+  "oi pessoal",
+  "bom dia",
+  "alguém aí?",
+  "testando o canal",
+  "mensagem aleatória",
+  "olá mundo",
+  "tudo bem?",
+  "sistemas distribuídos é legal",
+];
+
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+const aleatorio = (lista) => lista[Math.floor(Math.random() * lista.length)];
+const hora = (t) => new Date(t * 1000).toISOString();
 
 // envia uma requisição e espera a resposta
 async function enviar(req, servico, dados) {
@@ -19,9 +35,28 @@ async function enviar(req, servico, dados) {
   return resposta.data;
 }
 
+// recebe as publicações dos canais em que o bot está inscrito
+async function receber(sub) {
+  for await (const [topico, conteudo] of sub) {
+    const canal = topico.toString();
+    // o ZeroMQ filtra por prefixo, então confere se o canal é exatamente o inscrito
+    if (!inscritos.has(canal)) continue;
+
+    const msg = decode(conteudo);
+    console.log(
+      `[${nome}] MENSAGEM | canal: ${canal} | ${msg.data.user}: ${msg.data.message}` +
+        ` | enviada: ${hora(msg.data.timestamp)} | recebida: ${hora(Date.now() / 1000)}`
+    );
+  }
+}
+
 async function main() {
   const req = new zmq.Request();
   req.connect("tcp://" + BROKER + ":5555");
+
+  const sub = new zmq.Subscriber();
+  sub.connect("tcp://" + PROXY + ":5558");
+  receber(sub);
 
   // login: se der erro, tenta de novo com outro nome
   let tentativa = 0;
@@ -33,14 +68,37 @@ async function main() {
     await sleep(1000);
   }
 
-  // loop: lista os canais e cria um novo se tiver menos de 5
   while (true) {
-    const lista = await enviar(req, "channels", {});
-    if (lista.channels.length < 5) {
+    let canais = (await enviar(req, "channels", {})).channels;
+
+    // se existirem menos de 5 canais, cria um novo
+    if (canais.length < 5) {
       const novo = "canal_" + Math.floor(Math.random() * 1000);
       await enviar(req, "channel", { channel: novo, user: nome });
+      canais = (await enviar(req, "channels", {})).channels;
     }
-    await sleep(3000);
+
+    // se estiver inscrito em menos de 3 canais, se inscreve em mais um
+    if (inscritos.size < 3) {
+      const disponiveis = canais.filter((c) => !inscritos.has(c));
+      if (disponiveis.length > 0) {
+        const canal = aleatorio(disponiveis);
+        sub.subscribe(canal);
+        inscritos.add(canal);
+        console.log(`[${nome}] INSCRITO | canal: ${canal}`);
+      }
+    }
+
+    // escolhe um canal e envia 10 mensagens com intervalo de 1 segundo
+    if (canais.length > 0) {
+      const canal = aleatorio(canais);
+      for (let i = 0; i < 10; i++) {
+        await enviar(req, "publish", { user: nome, channel: canal, message: aleatorio(mensagens) });
+        await sleep(1000);
+      }
+    } else {
+      await sleep(1000);
+    }
   }
 }
 
