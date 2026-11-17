@@ -5,6 +5,9 @@ services:
   proxy:
     build: ./proxy
 
+  referencia:
+    build: ./referencia
+
   servidor_1:
     build: ./servidor
     environment:
@@ -14,6 +17,7 @@ services:
     depends_on:
       - broker
       - proxy
+      - referencia
 
   servidor_2:
     build: ./servidor
@@ -24,6 +28,7 @@ services:
     depends_on:
       - broker
       - proxy
+      - referencia
 
   bot_1:
     build: ./cliente

@@ -6,6 +6,7 @@ const PROXY = process.env.PROXY_HOST || "proxy";
 const nomeBase = process.env.BOT_NAME || "bot";
 let nome = nomeBase;
 
+let relogio = 0; // relógio lógico
 const inscritos = new Set(); // canais em que o bot está inscrito
 
 const mensagens = [
@@ -25,12 +26,15 @@ const hora = (t) => new Date(t * 1000).toISOString();
 
 // envia uma requisição e espera a resposta
 async function enviar(req, servico, dados) {
+  relogio++; // incrementa o relógio lógico antes de enviar
   dados.timestamp = Date.now() / 1000;
+  dados.clock = relogio;
   console.log(`[${nome}] ENVIADO  | ${servico} | ${JSON.stringify(dados)}`);
   await req.send(encode({ service: servico, data: dados }));
 
   const [bytes] = await req.receive();
   const resposta = decode(bytes);
+  relogio = Math.max(relogio, resposta.data.clock || 0);
   console.log(`[${nome}] RECEBIDO | ${resposta.service} | ${JSON.stringify(resposta.data)}`);
   return resposta.data;
 }
@@ -43,9 +47,11 @@ async function receber(sub) {
     if (!inscritos.has(canal)) continue;
 
     const msg = decode(conteudo);
+    relogio = Math.max(relogio, msg.data.clock || 0);
     console.log(
       `[${nome}] MENSAGEM | canal: ${canal} | ${msg.data.user}: ${msg.data.message}` +
-        ` | enviada: ${hora(msg.data.timestamp)} | recebida: ${hora(Date.now() / 1000)}`
+        ` | enviada: ${hora(msg.data.timestamp)} | recebida: ${hora(Date.now() / 1000)}` +
+        ` | clock: ${msg.data.clock} -> ${relogio}`
     );
   }
 }
